@@ -23,30 +23,26 @@
             if (results == null) return undefined;
             else return decodeURIComponent(results[1].replace(/\+/g, " "));
         }
-        function loadJSFile(filename){
-                var fileref = document.createElement('script');
-                fileref.setAttribute("type","text/javascript");
-                fileref.setAttribute("src", filename);
-                document.getElementsByTagName('body')[0].appendChild(fileref);
-            }
-    var doc;
+    var doc, cursor;
         $(document).ready(function() {
             var req = new XMLHttpRequest();
             var uri = getParameter('doc');
-            if (!uri) uri = 'https://github.com/chriswengermusic/Instrumental_Friends/blob/master/xml/Hot_Cross_Buns.xml';
+            if (!uri) uri = 'Hot_Cross_Buns.xml';
             req.open('GET', uri, true);
             req.onreadystatechange = function() {
                 if (req.readyState != 4) return;
                     doc = new Vex.Flow.Document(req.responseText);
                     doc.getFormatter().setWidth(800).draw($("#viewer")[0]);
-                    loadJSFile('js/exercisePlayer.js');
+
             };
 
             req.send();
+            return doc;
         });
-        //$(window).onresize(function () {
-            //doc.getFormatter().setWidth(800).draw($("#viewer")[0]);
-        //});
+
+        $(window).onresize(function () {
+            doc.getFormatter().setWidth(800).draw($("#viewer")[0]);
+        });
 
     </script>
 </head>
@@ -62,46 +58,36 @@
     <div class="row playerControls">
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <div class="arrow-right" onclick="cursorStart()"><a class="play" onclick="this.innerHTML = play(); cursorStart();">play</a></div>
+            <div class="arrow-right" onclick= drawFunction();> <a class="play" onclick="this.innerHTML = play();">play</a></div>
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="playerControls">Tempo:
+            <div class="playerControls">Tempo:<div class="arrow-up" id="plusTempo" onclick=increaseTempo();></div><div class="spacer"></div>
                 <div class="playerControls" id="tempoBox"><span id="showTempo" onchange="tempo = event.target.value;">86</span></div>
+                <div class="spacer"></div><div class="arrow-down" id="minusTempo" onclick=decreaseTempo();></div>
             </div>
         </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="arrow-up" id="plusTempo" onclick=increaseTempo();></div><div class="spacer"></div>
-
-            <div class="spacer"></div><div class="arrow-down" id="minusTempo" onclick=decreaseTempo();></div>
+            <div class="playerControls">Piano:<div class="arrow-up" id="plusPiano" onclick=increasePiano();></div><div class="spacer"></div>
+                <div class="playerControls" id="pianoLevel"><span id="pLevel" onchange="pianoLevel = event.target.value;">8</span></div>
+                <div class="spacer"></div><div class="arrow-down" id="minusPiano" onclick=decreasePiano();></div>
+                </div>
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="playerControls">Piano:
-                <div class="playerControls" id="pianoLevel"><span id="pLevel" onchange="pianoLevel = event.target.value;">8</span></div>
-            </div>
-        </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="arrow-up" id="plusPiano" onclick=increasePiano();></div><div class="spacer"></div>
-
-            <div class="spacer"></div><div class="arrow-down" id="minusPiano" onclick=decreasePiano();></div>
-        </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="playerControls">Drums:
-                <div class="playerControls" id="drumsLevel"><span id="dLevel" onchange="drumsLevel = event.target.value;">8</span></div>
+            <div class="playerControls" id="drumsVolume">
+                Drums: <span id="dLevel">0</span><input class="playerControls" id="drumsLevel" type="range" min="0" max="1" step="any" value="1" style="height: 5px; width: 50px" onInput="drumsLevel = event.target.value;">8
             </div>
          </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <div class="arrow-up" id="plusDrums" onclick=increaseDrums();></div><div class="spacer"></div>
-
-            <div class="spacer"></div><div class="arrow-down" id="minusDrums" onclick=decreaseDrums();></div>
-        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
     </div>
 </div>
+<script src="js/audioPlayer2.js"></script>
 <script src="js/helperFunctions.js"></script>
-<!--<script src="js/audioPlayer2.js"></script>-->
-<!--<script src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></script>--->
+<script src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></script>
 <script>
 
     /*var canvas = document.getElementById("positionMarker");
