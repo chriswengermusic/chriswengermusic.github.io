@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise Player</title>
+    <meta name="viewport" content="width=device-width initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Comfortaa:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/vexflow-debug.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        //screen.lockOrientation('landscape');
+        // source: http://stackoverflow.com/a/901144
+        function getParameter(name) {
+            name = name.replace(/\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+            var results = regex.exec(window.location.search);
+            if (results == null) return undefined;
+            else return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        function loadJSFile(filename){
+                var fileref = document.createElement('script');
+                fileref.setAttribute("type","text/javascript");
+                fileref.setAttribute("src", filename);
+                document.getElementsByTagName('body')[0].appendChild(fileref);
+            }
+    var doc;
+        $(document).ready(function() {
+            var req = new XMLHttpRequest();
+            var uri = getParameter('doc');
+            if (!uri) uri = 'Hot_Cross_Buns.xml';
+            req.open('GET', uri, true);
+            req.onreadystatechange = function() {
+                if (req.readyState != 4) return;
+                    doc = new Vex.Flow.Document(req.responseText);
+                    doc.getFormatter().setWidth(800).draw($("#viewer")[0]);
+                    loadJSFile('js/exercisePlayer.js');
+            };
+
+            req.send();
+        });
+        //$(window).onresize(function () {
+            //doc.getFormatter().setWidth(800).draw($("#viewer")[0]);
+        //});
+
+    </script>
+</head>
+<body>
+<div id="countOff"></div>
+<div class="container-fluid">
+    <div class= "row" id="notationViewer"><span id="title">&nbsp Hot Cross Buns </span><span id="playType">| Practice</span>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="viewer">
+            <p id="waitmsg">Please wait while we contact the mother ship...</p>
+        </div>
+    </div>
+    <div class="empty row"></div>
+    <div class="row playerControls">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="arrow-right" onclick="cursorStart()"><a class="play" onclick="this.innerHTML = play(); cursorStart();">play</a></div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="playerControls">Tempo:
+                <div class="playerControls" id="tempoBox"><span id="showTempo" onchange="tempo = event.target.value;">86</span></div>
+            </div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="arrow-up" id="plusTempo" onclick=increaseTempo();></div><div class="spacer"></div>
+
+            <div class="spacer"></div><div class="arrow-down" id="minusTempo" onclick=decreaseTempo();></div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="playerControls">Piano:
+                <div class="playerControls" id="pianoLevel"><span id="pLevel" onchange="pianoLevel = event.target.value;">8</span></div>
+            </div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="arrow-up" id="plusPiano" onclick=increasePiano();></div><div class="spacer"></div>
+
+            <div class="spacer"></div><div class="arrow-down" id="minusPiano" onclick=decreasePiano();></div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="playerControls">Drums:
+                <div class="playerControls" id="drumsLevel"><span id="dLevel" onchange="drumsLevel = event.target.value;">8</span></div>
+            </div>
+         </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <div class="arrow-up" id="plusDrums" onclick=increaseDrums();></div><div class="spacer"></div>
+
+            <div class="spacer"></div><div class="arrow-down" id="minusDrums" onclick=decreaseDrums();></div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 offset"></div>
+    </div>
+</div>
+<script src="js/helperFunctions.js"></script>
+<!--<script src="js/audioPlayer2.js"></script>-->
+<!--<script src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></script>--->
+<script>
+
+    /*var canvas = document.getElementById("positionMarker");
+    var context = canvas.getContext('2d');
+    context.beginPath();
+    context.moveTo(40, 11);
+    context.lineTo(40, 95);
+    context.strokeStyle = '#00FF00';
+    context.stroke();
+*/
+</script>
+</body>
+</html>
