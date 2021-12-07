@@ -1,0 +1,165 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+/*TODO: Media queries*/
+@media only screen and (max-width: 700px){
+    .offset{
+        display: none;
+    }
+}
+
+.container-fluid {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(36deg, #666666, #CCCCCC, #666666, #191919);
+    border-radius: 10px;
+    font-family: 'Comfortaa', cursive;
+    font-variant-caps: petite-caps;
+    font-weight: 400;
+}
+
+#countOff {
+    display: none;
+    position: fixed;
+    border-radius: 15px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 96px;
+    font-weight: 400;
+    z-index: 10000;
+    filter: alpha(opacity=50); /*older IE*/
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE */
+    -moz-opacity: .50; /*older Mozilla*/
+    -khtml-opacity: 0.5;   /*older Safari*/
+    opacity: 0.5;   /*supported by current Mozilla, Safari, and Opera*/
+    background-color:#000000;
+    position:fixed; top:0px; left:0px; width:100%; height:100%; color:#f8f8f8; text-align:center; vertical-align:middle;
+}
+
+#title, #playType {
+    font-family: 'Orbitron', sans-serif;
+    font-variant-caps: petite-caps;
+    font-weight: 700;
+    font-size: 36px;
+    color: #E60000;
+}
+#playType {
+    text-transform: uppercase;
+}
+
+#notationViewer {
+    position:relative;
+    height: 75%;
+}
+
+#waitmsg {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 48px;
+}
+
+#positionMarker {
+    position: absolute;
+    background: #00FF00;
+}
+
+#viewer {
+    position: absolute;
+    height: inherit;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+
+.empty {
+    height: 2.5%;
+}
+
+.playerControls {
+    text-align: center;
+    height: 25%;
+    top: 60%;
+}
+
+.play {
+    -moz-box-shadow:inset 0px 20px 26px 0px #b6cde3;
+    -webkit-box-shadow:inset 0px 20px 26px 0px #b6cde3;
+    box-shadow:inset 0px 20px 26px 0px #b6cde3;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+    background:-moz-linear-gradient(center top, #79bbff 5%, #378de5 100% );
+    background-color:#79bbff;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border-radius:20px;
+    color:#ffffff;
+    padding:8px 24px;
+    text-decoration:none;
+    text-shadow:1px 1px 6px #000000;
+    width: 80px;
+    text-align: center;
+}
+
+.play:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+    background:-moz-linear-gradient(center top, #378de5 5%, #79bbff 100% );
+    background-color:#378de5;
+}
+
+.play:active {
+    position:relative;
+    top:1px; left: 1px;
+}
+
+#showTempo, #pLevel, #dLevel {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #E60000;
+}
+
+#tempoBox, #pianoLevel, #drumsLevel {
+    background-color: #000000;
+    border-radius: 10px;
+    height: 50px;
+    width: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid blue;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 30px solid blue;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 30px solid #00CC00;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-right:30px solid blue;
+}
+.spacer {
+    height: 10px;
+}
+
+
